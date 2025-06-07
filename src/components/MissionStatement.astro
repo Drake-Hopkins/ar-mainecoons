@@ -1,12 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import female000 from '../assets/female_000.jpg';
+import female001 from '../assets/female_001.jpg';
+---
 
 <div id="mission-statement" class="min-h-screen bg-slate-500 self-center items-center content-center snap-center text-center place-self-center place-items-center justify-items-center center align-middle mx-auto">
 
   <div class="card lg:card-side bg-slate-50 shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
     <figure>
-      <img
-        src="/ar-mainecoons/big_boi.png"
-        alt="Album"
-        class="p-5 rounded-badge" />
+      <Image
+        src={female000}
+        alt="AR Mainecoons big boi"
+        widths={[300, 600, 900]}
+        sizes="(max-width: 1024px) 100vw, 600px"
+        loading="lazy"
+        class="p-5 rounded-badge"
+      />
     </figure>
     <div class="card-body">
       <p class="text-center content-center text-slate-50 bg-secondary border-secondary p-6 rounded-3xl text-xl">
@@ -25,10 +34,14 @@
 
     <div class="card lg:card-side bg-slate-50 shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
       <figure>
-        <img
-          src="/ar-mainecoons/lil_girl.png"
-          alt="Album"
-          class="p-5 rounded-badge w-3/4 h-auto" />
+        <Image
+          src={female001}
+          alt="AR Mainecoons lil girl"
+          widths={[300, 600, 900]}
+          sizes="(max-width: 1024px) 100vw, 600px"
+          loading="lazy"
+          class="p-5 rounded-badge w-3/4 h-auto"
+        />
       </figure>
       <div class="card-body">
         <p class="text-center content-center text-slate-50 bg-secondary border-secondary p-6 rounded-3xl text-xl"> 
@@ -41,3 +54,4 @@
 
   </div>
 
+</file>
