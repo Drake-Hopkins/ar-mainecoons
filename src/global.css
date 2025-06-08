@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .drawer {
   font-family: 'Montserrat Variable', sans-serif;
 }

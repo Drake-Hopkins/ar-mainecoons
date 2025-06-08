@@ -1,29 +1,30 @@
----
-import { Image } from 'astro:assets';
-import female000 from '../assets/female_000.jpg';
-import female001 from '../assets/female_001.jpg';
----
 
-<div id="mission-statement" class="min-h-screen bg-slate-500 self-center items-center content-center snap-center text-center place-self-center place-items-center justify-items-center center align-middle mx-auto">
+<div id="mission-statement" class="min-h-screen bg-secondary self-center items-center content-center snap-center text-center place-self-center place-items-center justify-items-center center align-middle mx-auto">
 
-  <div class="card lg:card-side bg-slate-50 shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
-    <figure>
-      <Image
-        src={female000}
-        alt="AR Mainecoons big boi"
-        widths={[300, 600, 900]}
-        sizes="(max-width: 1024px) 100vw, 600px"
-        loading="lazy"
-        class="p-5 rounded-badge"
-      />
-    </figure>
+
+    <div class="card lg:card-side bg-primary shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
+      <div class="card-body">
+        <p class="text-center content-center text-base-content bg-neutral border-secondary p-6 rounded-3xl text-xl"> 
+          We are a cattery in Texarkana, AR.  We've been breeding Champion European Mainecoon cats since 2022.  All litters are raised under hand and foot inside of our home.  Our kittens will all have first shots and have been tested negative for HCM.
+        </p>
+      <div class="card-actions justify-center">
+        <a href="https://find-a-breeder.cfa.org/listing/armainecoons/" target="_blank">
+          <button class="btn btn-accent text-primary text-md lg:text-lg font-bold link">
+            CFA Registered
+          </button>
+        </a>
+      </div>
+      </div>
+    </div>
+
+  <div class="card lg:card-side bg-primary shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
     <div class="card-body">
-      <p class="text-center content-center text-slate-50 bg-secondary border-secondary p-6 rounded-3xl text-xl">
+      <p class="text-center content-center text-base-content bg-neutral border-secondary p-6 rounded-3xl text-xl">
         If you are looking for a Mainecoon or have any questions, please click the link below to connect with us on Facebook.
       </p>
-      <div class="card-actions justify-end">
+      <div class="card-actions justify-center">
         <a href="https://www.facebook.com/profile.php?id=61559972097437" target="_blank">
-          <button class="btn btn-primary text-slate-50 text-md lg:text-lg font-bold link">
+          <button class="btn btn-accent text-primary text-md lg:text-lg font-bold link">
             AR Mainecoon Facebook Page
           </button>
         </a>
@@ -31,27 +32,4 @@ import female001 from '../assets/female_001.jpg';
     </div>
   </div>
 
-
-    <div class="card lg:card-side bg-slate-50 shadow-xl w-5/6 lg:w-1/2 mx-auto my-10">
-      <figure>
-        <Image
-          src={female001}
-          alt="AR Mainecoons lil girl"
-          widths={[300, 600, 900]}
-          sizes="(max-width: 1024px) 100vw, 600px"
-          loading="lazy"
-          class="p-5 rounded-badge w-3/4 h-auto"
-        />
-      </figure>
-      <div class="card-body">
-        <p class="text-center content-center text-slate-50 bg-secondary border-secondary p-6 rounded-3xl text-xl"> 
-          We are based in Texarkana, Arkansas and can provide you a Mainecoone with assurance of health and care.
-        </p>
-      </div>
-    </div>
-
-
-
   </div>
-
-</file>

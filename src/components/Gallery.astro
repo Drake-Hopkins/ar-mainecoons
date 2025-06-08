@@ -2,86 +2,77 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
-// Grab all your kitten images at build time
 const modules = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/*.{jpg,jpeg,png}',
   { eager: true }
 );
 
-// Build sorted arrays of URLs and alts
-const images = Object.entries(modules)
-  .filter(([path]) => /\/assets\/(female|male)_[0-9]{3}\.(jpg|jpeg|png)$/.test(path))
-  .map(([path, mod]) => {
-    const filename = path.split('/').pop()!;
-    const altText = filename.replace(/\.(jpg|jpeg|png)$/, '').replace(/[_-]/g, ' ');
-    return { src: mod.default, alt: altText };
-  })
+const images = Object.values(modules)
+  .map((m) => ({
+    src: m.default,
+    alt: m.default.src
+      .split('/')
+      .pop()!
+      .replace(/\.(jpe?g|png)$/, '')
+      .replace(/[_-]/g, ' '),
+  }))
   .sort((a, b) => a.alt.localeCompare(b.alt));
 
-const imageUrls = images.map((i) => i.src.src);
-const imageAlts = images.map((i) => i.alt);
+const urls = images.map((i) => i.src.src);
+const alts = images.map((i) => i.alt);
 ---
-<section class="max-w-6xl mx-auto py-8 px-4">
-  <h2 class="text-2xl font-bold mb-6 text-center">Gallery</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+
+<div id="gallery" class="min-h-screen bg-neutral self-center items-center content-center snap-center text-center place-self-center place-items-center justify-items-center center align-middle mx-auto">
+
+
+<section
+  id="gallery"
+  class="scroll-mt-16 max-w-6xl mx-auto py-8 px-4 my-10"
+  data-urls={JSON.stringify(urls)}
+  data-alts={JSON.stringify(alts)}
+>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
     {images.map((img, idx) => (
-      <div class="project relative overflow-hidden rounded-lg bg-gray-100">
+      <div class="group cursor-pointer relative overflow-hidden">
         <Image
           src={img.src}
           alt={img.alt}
-          widths={[200,400,800]}
-          sizes="(max-width:640px) 100vw, 200px"
+          widths={[200, 400, 800]}
+          sizes="(max-width: 640px) 100vw, 25vw"
           loading="lazy"
-          class="w-full h-40 object-cover"
+          class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
         />
-        <button
-          class="btn-box absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-50 transition duration-200"
-          onclick={`openLightbox(${idx})`}
-        >
-          <span class="px-3 py-1 bg-white text-sm font-semibold rounded">View</span>
-        </button>
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+            data-index={idx}
+          >
+            View
+          </button>
+        </div>
       </div>
     ))}
   </div>
 
-  <!-- Lightbox Overlay -->
   <div
     id="lightbox"
-    class="overlay fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4"
   >
     <div class="relative max-w-3xl w-full">
       <button
-        class="close absolute top-2 right-2 text-white text-2xl font-bold"
-        onclick="closeLightbox()"
-      >x</button>
+        id="lightbox-close"
+        class="absolute top-2 right-2 text-white text-3xl font-bold"
+        aria-label="Close"
+      >
+        &times;
+      </button>
       <img
         id="lightbox-img"
         src=""
         alt=""
-        class="w-full h-auto object-contain rounded"
+        class="w-full h-auto object-contain rounded-lg"
       />
     </div>
   </div>
 </section>
-
-<script type="module" is:inline >
-  // Inlined arrays from build-time
-  const imageUrls = JSON.parse('${JSON.stringify(imageUrls)}');
-  const imageAlts = JSON.parse('${JSON.stringify(imageAlts)}');
-  let selected = 0;
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-
-  window.openLightbox = function(idx) {
-    selected = idx;
-    lightboxImg.src = imageUrls[idx];
-    lightboxImg.alt = imageAlts[idx];
-    lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
-  };
-
-  window.closeLightbox = function() {
-    lightbox.classList.add('hidden');
-    lightbox.classList.remove('flex');
-  };
-</script>
+</div>
