@@ -17,19 +17,11 @@ const images = Object.values(modules)
       .replace(/[_-]/g, ' '),
   }))
   .sort((a, b) => a.alt.localeCompare(b.alt));
-
-const urls = images.map((i) => i.src.src);
-const alts = images.map((i) => i.alt);
 ---
-
-<div id="gallery" class="min-h-screen bg-secondary self-center items-center content-center snap-center text-center place-self-center place-items-center justify-items-center center align-middle mx-auto">
-
 
 <section
   id="gallery"
-  class="scroll-mt-16 max-w-6xl mx-auto py-8 px-4 my-10"
-  data-urls={JSON.stringify(urls)}
-  data-alts={JSON.stringify(alts)}
+  data-alts={JSON.stringify(images.map(i => i.alt))}
 >
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
     {images.map((img, idx) => (
@@ -57,6 +49,9 @@ const alts = images.map((i) => i.alt);
   <div
     id="lightbox"
     class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4"
+    tabindex="-1"
+    aria-modal="true"
+    role="dialog"
   >
     <div class="relative max-w-3xl w-full">
       <button
@@ -66,13 +61,16 @@ const alts = images.map((i) => i.alt);
       >
         &times;
       </button>
-      <img
-        id="lightbox-img"
-        src=""
-        alt=""
-        class="w-full h-auto object-contain rounded-lg"
-      />
+      {images.map((img, idx) => (
+        <Image
+          src={img.src}
+          alt={img.alt}
+          class="w-full h-auto object-contain rounded-lg lightbox-img"
+          data-lightbox-index={idx}
+          style="display: none;"
+        />
+      ))}
     </div>
   </div>
 </section>
-</div>
+

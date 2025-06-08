@@ -1,33 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const gallery = document.getElementById('gallery');
-  if (!gallery) return;
+const lightbox = document.getElementById('lightbox');
+const closeBtn = document.getElementById('lightbox-close');
+const lightboxImages = document.querySelectorAll('.lightbox-img');
 
-  const urls = JSON.parse(gallery.dataset.urls || '[]');
-  const alts = JSON.parse(gallery.dataset.alts || '[]');
-  const lightbox = document.getElementById('lightbox');
-  const imgEl = document.getElementById('lightbox-img');
-  const closeBtn = document.getElementById('lightbox-close');
-
-  gallery.querySelectorAll('button[data-index]').forEach((button) => {
-    const idx = Number(button.dataset.index);
-    button.addEventListener('click', () => {
-      if (!lightbox || !imgEl) return;
-      imgEl.src = urls[idx] || '';
-      imgEl.alt = alts[idx] || '';
-      lightbox.classList.remove('hidden');
-      lightbox.classList.add('flex');
-    });
-  });
-
-  closeBtn?.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-    lightbox.classList.remove('flex');
-  });
-
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      lightbox.classList.add('hidden');
-      lightbox.classList.remove('flex');
-    }
+// Attach click to all "View" buttons
+document.querySelectorAll('[data-index]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const idx = btn.dataset.index;
+    // Hide all lightbox images
+    lightboxImages.forEach(img => img.style.display = 'none');
+    // Show only the selected image
+    const selectedImg = document.querySelector(`.lightbox-img[data-lightbox-index="${idx}"]`);
+    if (selectedImg) selectedImg.style.display = 'block';
+    // Show lightbox
+    lightbox.classList.remove('hidden');
+    // Optional: disable background scroll
+    document.body.style.overflow = 'hidden';
   });
 });
+
+// Close logic
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.add('hidden');
+  lightboxImages.forEach(img => img.style.display = 'none');
+  // Optional: re-enable background scroll
+  document.body.style.overflow = '';
+});
+
+// Optional: close on overlay click or Escape key
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.add('hidden');
+    lightboxImages.forEach(img => img.style.display = 'none');
+    document.body.style.overflow = '';
+  }
+});
+window.addEventListener('keydown', (e) => {
+  if (e.key === "Escape" && !lightbox.classList.contains('hidden')) {
+    lightbox.classList.add('hidden');
+    lightboxImages.forEach(img => img.style.display = 'none');
+    document.body.style.overflow = '';
+  }
+});
+
