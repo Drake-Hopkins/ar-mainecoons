@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   closeBtn.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
+    lightbox.classList.add('hidden'); 
     lightboxImages.forEach(img => img.style.display = 'none');
     document.body.style.overflow = '';
   });
@@ -37,3 +37,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+

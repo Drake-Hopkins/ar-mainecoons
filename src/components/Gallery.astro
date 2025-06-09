@@ -18,7 +18,7 @@ const images = Object.values(modules)
   }))
   .sort((a, b) => a.alt.localeCompare(b.alt));
 ---
-
+<div id="gallery" class="bg-secondary py-48">
 <section
   id="gallery"
   data-alts={JSON.stringify(images.map(i => i.alt))}
@@ -48,7 +48,7 @@ const images = Object.values(modules)
 
   <div
     id="lightbox"
-    class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4"
+    class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto align-middle center justify-items-center"
     tabindex="-1"
     aria-modal="true"
     role="dialog"
@@ -73,4 +73,3 @@ const images = Object.values(modules)
     </div>
   </div>
 </section>
-
