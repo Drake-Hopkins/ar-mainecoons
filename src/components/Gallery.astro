@@ -17,8 +17,10 @@ const images = Object.values(modules)
       .replace(/[_-]/g, ' '),
   }))
   .sort((a, b) => a.alt.localeCompare(b.alt));
+
 ---
-<div id="gallery" class="bg-secondary py-48">
+
+<div id="gallery" class="bg-base-content py-20 lg:px-40">
 <section
   id="gallery"
   data-alts={JSON.stringify(images.map(i => i.alt))}

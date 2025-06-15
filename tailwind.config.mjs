@@ -11,31 +11,42 @@ export default {
     themes: [
       {
         cupcake: {
-          /* Primary */
-          "primary":          "#333446",
-          "primary-focus":    "#2C2E38",
-          "primary-content":  "#ffffff",
+          // /* Primary */
+          // "primary":          "#333446",
+          // "primary-focus":    "#2C2E38",
+          // "primary-content":  "#ffffff",
 
-          /* Secondary */
-          "secondary":        "#7F8CAA",
-          "secondary-focus":  "#6B7A99",
-          "secondary-content":"#ffffff",
+          // /* Secondary */
+          // "secondary":        "#7F8CAA",
+          // "secondary-focus":  "#6B7A99",
+          // "secondary-content":"#ffffff",
 
-          /* Accent */
-          "accent":           "#B8CFCE",
-          "accent-focus":     "#A0BDBA",
-          "accent-content":   "#333446",
+          // /* Accent */
+          // "accent":           "#B8CFCE",
+          // "accent-focus":     "#A0BDBA",
+          // "accent-content":   "#333446",
 
-          /* Neutral */
-          "neutral":          "#EAEFEF",
-          "neutral-focus":    "#D2DCDC",
-          "neutral-content":  "#333446",
+          // /* Neutral */
+          // "neutral":          "#EAEFEF",
+          // "neutral-focus":    "#D2DCDC",
+          // "neutral-content":  "#333446",
 
-          /* Base backgrounds & text */
-          "base-100":         "#f3f4f6",
-          "base-200":         "#e5e7eb",
-          "base-300":         "#d1d5db",
-          "base-content":     "#1f2937",
+          // /* Base backgrounds & text */
+          // "base-100":         "#f3f4f6",
+          // "base-200":         "#e5e7eb",
+          // "base-300":         "#d1d5db",
+          // "base-content":     "#1f2937",
+          
+          
+          "primary": "#212529",
+          "primary-content": "#343a40",
+          "secondary": "#495057",
+          "secondary-content": "#6c757d",
+          "accent": "#adb5bd",
+          "accent-content": "#ced4da",
+          "neutral": "#dee2e6",
+          "neutral-content": "#e9ecef",
+          "base-content": "#f8f9fa",
         }
       }
     ]
