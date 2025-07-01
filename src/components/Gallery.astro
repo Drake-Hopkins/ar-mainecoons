@@ -13,11 +13,10 @@ const images = Object.values(modules)
     alt: m.default.src
       .split('/')
       .pop()!
-      .replace(/\.(jpe?g|png)$/, '')
+      .replace(/\.(jpe?g)$/, '')
       .replace(/[_-]/g, ' '),
   }))
   .sort((a, b) => a.alt.localeCompare(b.alt));
-
 ---
 
 <div id="gallery" class="bg-base-content py-20 lg:px-40">
