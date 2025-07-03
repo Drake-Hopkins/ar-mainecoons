@@ -5,8 +5,18 @@ import Hero from '../components/Hero.astro';
 import Gallery from '../components/Gallery.astro';
 import MissionStatement from '../components/MissionStatement.astro';
 import Footer from '../components/Footer.astro';
+
+const url = `${import.meta.env.SITE}${Astro.url.pathname}`;
+
+const meta = {
+  title: 'AR Mainecoons • Premier Purebred Maine Coon Breeder',
+  description: 'AR Mainecoons offers pedigree Maine Coon kittens from one loving home to another. Reserve yours today!',
+  url,
+  image: `${import.meta.env.SITE}/paw-solid-green.svg`,
+  author: 'AR Mainecoons',
+};
 ---
-<Layout title="AR Mainecoons">
+<Layout {...meta}>
   <main class="h-screen max-w-screen scroll-smooth">
     <Navbar />
     <Hero />

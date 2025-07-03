@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Link_Layout.astro';
+
+const links = [
+  {
+    name: 'AR Mainecoons Website',
+    url: 'https://armainecoons.com/'
+  },
+  {
+		name: 'Facebook',
+		url: 'https://www.facebook.com/profile.php?id=61559972097437'
+	},
+	{
+		name: 'Instagram',
+		url: 'https://instagram.com/armainecoons'
+	},
+{
+		name: 'CFA Registered Breeder',
+		url: 'https://find-a-breeder.cfa.org/listing/armainecoons/'
+	}
+]
+---
+
+<Layout title="Links - AR Mainecoons">
+  <main class="h-screen max-h-screen max-w-screen scroll-smooth bg-base-content p-16">
+    <div class="max-w-md mx-auto text-center">
+      <img src="/paw-solid-green.svg" alt="paw" class="mx-auto w-24 h-auto p-1">
+      <h2 class="text-3xl font-bold py-2 text-secondary-content">Welcome to <br><span class="text-4xl text-primary-content">AR Mainecoons</span></h2>
+      <h3 class="text-xl py-2 text-secondary">Premier Breeder of Stunning Mainecoons</h3> 
+      <a class="link" href="ARMainecoonCattery.pdf"><h5 class="text-md py-2 text-secondary italic font-semibold">CFA Registered Since 2022</h5></a>
+      <hr class="border border-secondary-content my-5">
+    </div>
+    <ul>
+      {links.map((link, index) => (
+        <li class="text-center py-3">
+          <a href={link.url} class="btn btn-md w-48 rounded-xl text-secondary" target="_blank">{link.name}</a>
+        </li>
+      ))}
+    </ul>
+    <hr class="border border-secondary my-5 max-w-md mx-auto">
+    <footer class="footer footer-center bg-base-content py-10">
+      <aside>
+        <img src="/paw-solid-green.svg" alt="AR Mainecoons" class="h-16 w-auto py-2" />
+        <p class="font-bold text-primary-content">
+          AR Mainecoons
+        </p>
+        <p class="text-secondary-content">
+          Designed & Developed by <a href="https://links.drakeafk.io/" class="link link-primary" target="_blank">Drake Hopkins</a>
+        </p>
+        <p class="text-secondary-content">Copyright © {new Date().getFullYear()}</p>
+      </aside>
+    </footer>  
+  </main>
+</Layout>
+
