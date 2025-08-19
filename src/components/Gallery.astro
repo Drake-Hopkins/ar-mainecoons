@@ -14,19 +14,14 @@ if (!API_KEY || !PARENT_ID) {
     data-parent-id={PARENT_ID}
     class="relative"
   >
-    <!-- Header / status -->
     <div id="gallery-status" class="text-center text-base-100 mb-6">Loading images…</div>
 
-    <!-- Grid gets populated by JS (Tailwind here is OK; this file is scanned) -->
-  <!-- Gallery Grid -->
+    <!-- Tailwind here is fine (file is in /src) -->
     <div
       id="gallery-grid"
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
-    >
-      <!-- JS injects items here -->
-    </div>
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
+    ></div>
 
-    <!-- Lightbox -->
     <div
       id="lightbox"
       class="fixed z-50 inset-0 bg-black/80 hidden p-4"
@@ -49,5 +44,5 @@ if (!API_KEY || !PARENT_ID) {
   </section>
 </div>
 
-<!-- IMPORTANT: cache-bust so the browser grabs the new JS -->
-<script type="module" src="/js/gallery.js?v=6"></script>
+<!-- Cache-bust version so you actually get the new JS -->
+<script type="module" src="/js/gallery.js?v=7"></script>
