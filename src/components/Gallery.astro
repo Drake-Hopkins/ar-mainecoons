@@ -1,4 +1,4 @@
----
+<!-- ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
@@ -73,4 +73,54 @@ const images = Object.values(modules)
       ))}
     </div>
   </div>
-</section>
+</section> -->
+
+
+
+---
+const API_KEY = import.meta.env.PUBLIC_GOOGLE_API_KEY;
+const PARENT_ID = import.meta.env.PUBLIC_DRIVE_PARENT_FOLDER_ID;
+
+if (!API_KEY || !PARENT_ID) {
+  console.warn("Missing PUBLIC_GOOGLE_API_KEY or PUBLIC_DRIVE_PARENT_FOLDER_ID");
+}
+---
+
+<div class="bg-base-content py-20 lg:px-40">
+  <section
+    id="gallery"
+    data-api-key={API_KEY}
+    data-parent-id={PARENT_ID}
+    class="relative"
+  >
+    <!-- Header / status -->
+    <div id="gallery-status" class="text-center text-base-100 mb-6">Loading images…</div>
+
+    <!-- Grid gets populated by JS -->
+    <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"></div>
+
+    <!-- Lightbox -->
+    <div
+      id="lightbox"
+      class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto align-middle center justify-items-center"
+      tabindex="-1"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="relative max-w-4xl w-full">
+        <button
+          id="lightbox-close"
+          class="absolute top-2 right-2 text-white text-3xl font-bold"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <!-- Images are injected here -->
+        <div id="lightbox-stage" class="w-full h-auto"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Load our client script -->
+<script type="module" src="/scripts/gallery.js"></script>
