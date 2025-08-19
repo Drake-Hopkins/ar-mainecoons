@@ -17,22 +17,24 @@ if (!API_KEY || !PARENT_ID) {
     <!-- Header / status -->
     <div id="gallery-status" class="text-center text-base-100 mb-6">Loading images…</div>
 
-    <!-- Grid gets populated by JS -->
+    <!-- Grid gets populated by JS (Tailwind here is OK; this file is scanned) -->
+  <!-- Gallery Grid -->
     <div
       id="gallery-grid"
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
-    ></div>
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
+    >
+      <!-- JS injects items here -->
+    </div>
 
     <!-- Lightbox -->
     <div
       id="lightbox"
-      class="fixed z-50 inset-0 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed z-50 inset-0 bg-black/80 hidden p-4"
       tabindex="-1"
       aria-modal="true"
       role="dialog"
     >
-      <div class="relative w-full max-w-6xl">
-        <!-- Close -->
+      <div class="relative w-full max-w-6xl mx-auto">
         <button
           id="lightbox-close"
           class="absolute -top-3 -right-3 z-10 btn btn-circle btn-sm bg-white/90 text-gray-900 border-none shadow-lg hover:bg-white"
@@ -41,12 +43,11 @@ if (!API_KEY || !PARENT_ID) {
         >
           ✕
         </button>
-        <!-- Images injected here -->
         <div id="lightbox-stage" class="w-full h-auto"></div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- Load our client script from /public -->
-<script type="module" src="/js/gallery.js?v=5"></script>
+<!-- IMPORTANT: cache-bust so the browser grabs the new JS -->
+<script type="module" src="/js/gallery.js?v=6"></script>

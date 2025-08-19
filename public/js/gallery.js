@@ -29,15 +29,40 @@ const driveFallbackSrc = (id) =>
 
 document.addEventListener("DOMContentLoaded", async function () {
   const section = document.getElementById("gallery");
-  const grid = document.getElementById("gallery-grid");
-  const status = document.getElementById("gallery-status");
+const grid = document.getElementById("gallery-grid");
+files.forEach((file) => {
+  const item = document.createElement("div");
+  item.className =
+    "relative rounded-xl overflow-hidden shadow-md bg-base-100 hover:shadow-lg transition";
+
+  item.innerHTML = `
+    <img
+      src="${file.thumbnailLink}"
+      alt="${file.name}"
+      class="w-full h-64 object-cover"
+    />
+    <button
+      class="absolute bottom-2 left-1/2 -translate-x-1/2 btn btn-sm btn-primary shadow"
+      data-id="${file.id}"
+    >
+      View
+    </button>
+  `;
+  grid.appendChild(item);
+});  const status = document.getElementById("gallery-status");
   const apiKey = section?.dataset.apiKey;
   const parentId = section?.dataset.parentId;
 
   const lightbox = document.getElementById("lightbox");
   const closeBtn = document.getElementById("lightbox-close");
-  const stage = document.getElementById("lightbox-stage");
-
+const stage = document.getElementById("lightbox-stage");
+stage.innerHTML = `
+  <img
+    src="https://drive.google.com/uc?id=${fileId}"
+    alt="Lightbox"
+    class="max-h-[90vh] max-w-full mx-auto rounded-xl shadow-lg object-contain"
+  />
+`;
   if (!apiKey || !parentId) {
     status && (status.textContent = "Missing Drive configuration.");
     return;
