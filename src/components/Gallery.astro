@@ -1,8 +1,4 @@
 ---
-/**
- * Dynamic Drive-backed gallery.
- * Reads env vars (PUBLIC_*) and exposes them to the client script via data-attrs.
- */
 const API_KEY = import.meta.env.PUBLIC_GOOGLE_API_KEY;
 const PARENT_ID = import.meta.env.PUBLIC_DRIVE_PARENT_FOLDER_ID;
 
@@ -24,31 +20,33 @@ if (!API_KEY || !PARENT_ID) {
     <!-- Grid gets populated by JS -->
     <div
       id="gallery-grid"
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"
     ></div>
 
     <!-- Lightbox -->
     <div
       id="lightbox"
-      class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto"
+      class="fixed z-50 inset-0 bg-black/80 hidden items-center justify-center p-4"
       tabindex="-1"
       aria-modal="true"
       role="dialog"
     >
-      <div class="relative max-w-4xl w-full">
+      <div class="relative w-full max-w-6xl">
+        <!-- Close -->
         <button
           id="lightbox-close"
-          class="absolute top-2 right-2 text-white text-3xl font-bold"
+          class="absolute -top-3 -right-3 z-10 btn btn-circle btn-sm bg-white/90 text-gray-900 border-none shadow-lg hover:bg-white"
           aria-label="Close"
+          title="Close"
         >
-          &times;
+          ✕
         </button>
-        <!-- Images are injected here -->
+        <!-- Images injected here -->
         <div id="lightbox-stage" class="w-full h-auto"></div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- Load our client script (served from /public). Version query busts cache. -->
-<script type="module" src="/js/gallery.js?v=4"></script>
+<!-- Load our client script from /public -->
+<script type="module" src="/js/gallery.js?v=5"></script>
