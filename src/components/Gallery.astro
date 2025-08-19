@@ -1,84 +1,8 @@
-<!-- ---
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
-
-const modules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/*.{jpg,jpeg,png}',
-  { eager: true }
-);
-
-const images = Object.values(modules)
-  .map((m) => ({
-    src: m.default,
-    alt: m.default.src
-      .split('/')
-      .pop()!
-      .replace(/\.(jpe?g)$/, '')
-      .replace(/[_-]/g, ' '),
-  }))
-  .sort((a, b) => a.alt.localeCompare(b.alt));
 ---
-
-<div id="gallery" class="bg-base-content py-20 lg:px-40">
-<section
-  id="gallery"
-  data-alts={JSON.stringify(images.map(i => i.alt))}
->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-    {images.map((img, idx) => (
-      <div class="group cursor-pointer relative overflow-hidden">
-        <Image
-          src={img.src}
-          alt={img.alt}
-          widths={[200, 400, 800]}
-          sizes="(max-width: 640px) 100vw, 25vw"
-          loading="lazy"
-          class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
-        />
-        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <button
-            class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-            data-index={idx}
-          >
-            View
-          </button>
-        </div>
-      </div>
-    ))}
-  </div>
-
-  <div
-    id="lightbox"
-    class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto align-middle center justify-items-center"
-    tabindex="-1"
-    aria-modal="true"
-    role="dialog"
-  >
-    <div class="relative max-w-3xl w-full">
-      <button
-        id="lightbox-close"
-        class="absolute top-2 right-2 text-white text-3xl font-bold"
-        aria-label="Close"
-      >
-        &times;
-      </button>
-      {images.map((img, idx) => (
-        <Image
-          src={img.src}
-          alt={img.alt}
-          class="w-full h-auto object-contain rounded-lg lightbox-img"
-          data-lightbox-index={idx}
-          style="display: none;"
-        />
-      ))}
-    </div>
-  </div>
-</section>
- -->
-
-
-
----
+/**
+ * Dynamic Drive-backed gallery.
+ * Reads env vars (PUBLIC_*) and exposes them to the client script via data-attrs.
+ */
 const API_KEY = import.meta.env.PUBLIC_GOOGLE_API_KEY;
 const PARENT_ID = import.meta.env.PUBLIC_DRIVE_PARENT_FOLDER_ID;
 
@@ -98,12 +22,15 @@ if (!API_KEY || !PARENT_ID) {
     <div id="gallery-status" class="text-center text-base-100 mb-6">Loading images…</div>
 
     <!-- Grid gets populated by JS -->
-    <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"></div>
+    <div
+      id="gallery-grid"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
+    ></div>
 
     <!-- Lightbox -->
     <div
       id="lightbox"
-      class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto align-middle center justify-items-center"
+      class="fixed z-50 inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 mx-auto"
       tabindex="-1"
       aria-modal="true"
       role="dialog"
@@ -123,5 +50,5 @@ if (!API_KEY || !PARENT_ID) {
   </section>
 </div>
 
-<!-- Load our client script -->
-<script type="module" src="/js/gallery.js"></script>
+<!-- Load our client script (served from /public). Version query busts cache. -->
+<script type="module" src="/js/gallery.js?v=4"></script>
