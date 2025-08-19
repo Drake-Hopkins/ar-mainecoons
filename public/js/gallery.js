@@ -55,7 +55,9 @@ function driveListUrl({ q, fields = "files(id,name,mimeType,modifiedTime,created
 const IMG_EXT = /\.(jpe?g|png|gif|webp|bmp|tiff?)$/i;
 
 // Turn a file ID into an imageable URL
-const driveImgSrc = (id) => `https://drive.google.com/uc?export=view&id=${id}`;
+// More reliable image host (still public Drive)
+const driveImgSrc = (id) =>
+  `https://drive.usercontent.google.com/uc?id=${id}&export=view`;
 
 document.addEventListener("DOMContentLoaded", async function () {
   const section = document.getElementById("gallery");
@@ -136,6 +138,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div class="group cursor-pointer relative overflow-hidden">
           <img
             src="${src}"
+            referrerpolicy="no-referrer"
             alt="${alt.replace(/"/g, "&quot;")}"
             loading="lazy"
             class="w-full h-48 object-cover rounded-lg transition-transform transform scale-100 group-hover:scale-105"
@@ -160,6 +163,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       return `
         <img
           src="${src}"
+          referrerpolicy="no-referrer"
           alt="${alt.replace(/"/g, "&quot;")}"
           class="w-full h-auto object-contain rounded-lg lightbox-img"
           data-lightbox-index="${idx}"
